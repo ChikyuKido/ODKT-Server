@@ -1,0 +1,94 @@
+[chance]
+typen = ["zahle","haus-reperatur","grundsteuer","gehe","erhalte","hebe"]
+
+[[chance.entry]]
+id = 10000
+typ = "zahle"
+text = "Die Bank zahlt \n Dir \n an Dividenden \n 60,-"
+wert = 60
+
+[[chance.entry]]
+id = 10001
+typ = "zahle"
+text = "Für \n Autoreperatur \n zahle \n 140,-"
+wert = 140
+
+[[chance.entry]]
+id = 10002
+typ = "zahle"
+text = "Für unerlaubter \n Parken \n bezahlst Du \n 10,-"
+wert = 10
+
+
+[[chance.entry]]
+id = 10003
+typ = "erhalte"
+text = "Für den Bau \n erhälsts Du \n 140,- \n Bundeszuschuß"
+wert = 140
+
+[[chance.entry]]
+id = 10004
+typ = "gehe"
+text = "Gehe auf Feld 22 \n Passierst Du den \n Start erhältst Du \n 200,-"
+feld = "f22"
+
+[[chance.entry]]
+id = 10005
+typ = "zahle"
+text = "Für \n Unfallversicherungen \n bezahlst Du \n 20,-"
+wert = 20
+
+[[chance.entry]]
+id = 10006
+typ = "haus-reperatur"
+text = "Für jedes haus in \n Deinem Besitz bezahlst \n Du an Reperaturkosten \n 20,- \n für jedes Hotel \n 80,-"
+haus = 20
+hotel = 80
+
+[[chance.entry]]
+id = 10007
+typ = "hebe"
+text = "Diese Karte befreit \n Dich aus dem Arrest ! \n ------------ \n Hebe diese Karte \n auf Du wirst sie \n brauchen"
+aktion = "befreie-arrest"
+
+[[chance.entry]]
+id = 10008
+typ = "grundsteuer"
+text = "An Grundsteuer \n zahlst Du für deine \n Grundstücke \n 10% vom Kaufwert"
+wert = 10
+
+[[chance.entry]]
+id = 10009
+typ = "gehe"
+text = "Gehe in den \n Arrest"
+feld = "farrest"
+
+[[chance.entry]]
+id = 10010
+typ = "gehe"
+text = "Gehe zurück um \n 4 Felder"
+feld = "f-4"
+
+[[chance.entry]]
+id = 10011
+typ = "zahle"
+text = "Zahle \n 5,- \n Polizeistrafe"
+wert = 5
+
+[[chance.entry]]
+id = 10012
+typ = "gehe"
+text = "Besuche Graz und \n gehe in der \n Annenstraße spazieren. \n Passierst Du den \n Start erhälst du \n 200,-"
+feld = "s1002"
+
+[[chance.entry]]
+id = 10013
+typ = "gehe"
+text = "Besuche Salzburg \n und gehe auf dem \n Mirabellplatz spazieren. \n Passierst Du den \n Start erhälst du \n 200,-"
+feld = "s1012"
+
+[[chance.entry]]
+id = 10014
+typ = "gehe"
+text = "Fahre mit dem \n Flugzeug \n Wien - Venedig \n Passierst Du den \n Start erhälst du \n 200,-"
+feld = "s3002"

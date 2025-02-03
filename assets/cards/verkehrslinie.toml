@@ -1,0 +1,24 @@
+[verkehrslinie]
+start = 20
+multiplier = 2
+text = "Besitzt Du von den Verkehrslinien \n %d, %d, %d, %d nur eine, erhältst Du \n an Fahrgeld"
+
+[[verkehrslinie.entry]]
+id = 2000
+preis = 160
+name = "Wien-Graz"
+
+[[verkehrslinie.entry]]
+id = 2001
+preis = 160
+name = "Wien-Budapest"
+
+[[verkehrslinie.entry]]
+id = 2002
+preis = 160
+name = "Wien-Innsbruck"
+
+[[verkehrslinie.entry]]
+id = 2003
+preis = 160
+name = "Glocknerstraße"

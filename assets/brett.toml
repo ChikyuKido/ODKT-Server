@@ -1,0 +1,123 @@
+[brett]
+
+[feld]
+[[feld.entry]]
+id = 0
+card_id = 0
+[[feld.entry]]
+id = 1
+card_id = 1000
+[[feld.entry]]
+id = 2
+card_id = 1
+[[feld.entry]]
+id = 3
+card_id = 3000
+[[feld.entry]]
+id = 4
+card_id = 1001
+[[feld.entry]]
+id = 5
+card_id = 1002
+[[feld.entry]]
+id = 6
+card_id = 1003
+[[feld.entry]]
+id = 7
+card_id = 2000
+[[feld.entry]]
+id = 8
+card_id = 2
+[[feld.entry]]
+id = 9
+card_id = 1004
+[[feld.entry]]
+id = 10
+card_id = 3
+[[feld.entry]]
+id = 11
+card_id = 1005
+[[feld.entry]]
+id = 12
+card_id = 2001
+[[feld.entry]]
+id = 13
+card_id = 3001
+[[feld.entry]]
+id = 14
+card_id = 1006
+[[feld.entry]]
+id = 15
+card_id = 1007
+[[feld.entry]]
+id = 16
+card_id = 1008
+[[feld.entry]]
+id = 17
+card_id = 2002
+[[feld.entry]]
+id = 18
+card_id = 1009
+[[feld.entry]]
+id = 19
+card_id = 1010
+[[feld.entry]]
+id = 20
+card_id = 4
+[[feld.entry]]
+id = 21
+card_id = 1011
+[[feld.entry]]
+id = 22
+card_id = 1
+[[feld.entry]]
+id = 23
+card_id = 2003
+[[feld.entry]]
+id = 24
+card_id = 1012
+[[feld.entry]]
+id = 25
+card_id = 1013
+[[feld.entry]]
+id = 26
+card_id = 1014
+[[feld.entry]]
+id = 27
+card_id = 2
+[[feld.entry]]
+id = 28
+card_id = 1015
+[[feld.entry]]
+id = 29
+card_id = 1016
+[[feld.entry]]
+id = 30
+card_id = 5
+[[feld.entry]]
+id = 31
+card_id = 1017
+[[feld.entry]]
+id = 32
+card_id = 6
+[[feld.entry]]
+id = 33
+card_id = 3001
+[[feld.entry]]
+id = 34
+card_id = 1018
+[[feld.entry]]
+id = 35
+card_id = 1019
+[[feld.entry]]
+id = 36
+card_id = 1020
+[[feld.entry]]
+id = 37
+card_id = 1
+[[feld.entry]]
+id = 38
+card_id = 1021
+[[feld.entry]]
+id = 39
+card_id = 1022

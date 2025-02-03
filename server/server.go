@@ -20,7 +20,6 @@ var (
 )
 
 func Start() {
-
 	http.HandleFunc("/ws", connectionHandler)
 	readMessages()
 	err := http.ListenAndServe(*addr, nil)
@@ -38,6 +37,13 @@ func connectionHandler(w http.ResponseWriter, r *http.Request) {
 		logrus.Errorf("Failed to upgrade connection: %v", err)
 		return
 	}
+	if r.Header.Get("Authentication") != "Bearer token" {
+		conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "Authentication token is invalid"))
+		conn.Close()
+		logrus.Infof("Connection from %v closed due to invalid token", conn.RemoteAddr())
+
+		return
+	}
 	logrus.Infof("New connection from %v", conn.RemoteAddr())
 	connections = append(connections, connection.NewConnection(conn, &server))
 }
@@ -47,7 +53,11 @@ func readMessages() {
 		for {
 			message := <-server.Messages
 			logrus.Infof("Received message: %v", string(message.Msg))
-			message.Conn.SendMessage([]byte("test"))
+			go func() {
+				for {
+					message.Conn.SendMessage([]byte(message.Msg))
+				}
+			}()
 		}
 	}()
 }

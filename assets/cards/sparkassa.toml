@@ -1,0 +1,99 @@
+[chance]
+typen = ["zahle", "gehe", "erhalte"]
+
+[[chance.entry]]
+id = 11000
+typ = "erhalte"
+text = "Für Bankzinsen \n erhältst Du \n 180,-"
+wert = 180
+
+[[chance.entry]]
+id = 11001
+typ = "gehe"
+text = "Geh zum Start \n und hebe \n 200,- ab"
+gehe = "fstart"
+
+[[chance.entry]]
+id = 11002
+typ = "erhalte"
+text = "Die Bank \n bezahlt Dir \n an Zinsen \n 25,-"
+wert = 25
+
+[[chance.entry]]
+id = 11003
+typ = "zahle"
+text = "Wegen Überschreitung \n der Fahrordnung \n bezahle \n 15,-"
+wert = 15
+
+[[chance.entry]]
+id = 11004
+typ = "zahle"
+text = "Bezahle Deine \n Lebensversicherungs- \n Prämie \n 120,-"
+wert = 120
+
+[[chance.entry]]
+id = 11005
+typ = "erhalte"
+text = "Für den Verkauf \n von Wertpapieren \n erhältst Du \n 50,-"
+wert = 50
+
+[[chance.entry]]
+id = 11006
+typ = "erhalte"
+text = "An Reisespesen- \n beitrag erhältst Du \n 40,-"
+wert = 40
+
+[[chance.entry]]
+id = 11007
+typ = "zahle"
+text = "Für Gehsteigreinigung \n bezahle \n 40,-"
+wert = 40
+
+[[chance.entry]]
+id = 11008
+typ = "zahle"
+text = "An die \n Krankenkasse \n bezahle \n 130,-"
+wert = 130
+
+[[chance.entry]]
+id = 11009
+typ = "gehe"
+text = "Gehe in den \n Arrest"
+feld = "farrest"
+
+[[chance.entry]]
+id = 11010
+typ = "erhalte"
+text = "Für eine \n Geschäftsvermittlung \n erhältst Du \n 20,- \n Provision"
+wert = 20
+
+[[chance.entry]]
+id = 11011
+typ = "erhalte"
+text = "In der \n Klassenlotterie \n hast Du \n 20,- \n gewonnen"
+wert = 20
+
+
+[[chance.entry]]
+id = 11012
+typ = "erhalte"
+text = "An Umsatzsteuer- \n Rückvergütungen \n erhältst DU \n 35,-"
+wert = 35
+
+[[chance.entry]]
+id = 11013
+typ = "zahle"
+text = "Kauf Dir ein Los \n der Klassenlotterie \n und bezahle \n 48,-"
+wert = 48
+
+[[chance.entry]]
+id = 11014
+typ = "erhalte"
+text = "Für eine \n gewonnene Wette \n erhälst Du \n 120,-"
+wert = 120
+
+
+
+
+
+

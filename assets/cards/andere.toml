@@ -1,0 +1,24 @@
+[andere]
+[[andere.entry]]
+id = 0
+name = "start"
+[[andere.entry]]
+id = 1
+name = "chance"
+[[andere.entry]]
+id = 2
+name = "sparkassa"
+[[andere.entry]]
+id = 3
+name = "gesetzesverletzung"
+[[andere.entry]]
+id = 4
+prozent = 10
+maximal = 350
+name = "vermögendsabgabe"
+[[andere.entry]]
+id = 5
+name = "gefängnis"
+[[andere.entry]]
+id = 6
+name = "erwerbssteuer"
