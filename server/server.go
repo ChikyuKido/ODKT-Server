@@ -2,37 +2,61 @@ package server
 
 import (
 	"flag"
+	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"odkt/server/connection"
+	"odkt/server/route"
 )
 
 type Server struct {
-	Messages chan connection.Message
+	Messages    chan connection.Message
+	Connections []*connection.Connection
+	Upgrader    websocket.Upgrader
+	Addr        *string
 }
 
 var (
-	upgrader    = websocket.Upgrader{}
-	connections = make([]*connection.Connection, 0)
-	addr        = flag.String("addr", "localhost:8080", "http service address")
-	server      = Server{Messages: make(chan connection.Message)}
+	server = Server{
+		Messages:    make(chan connection.Message),
+		Connections: make([]*connection.Connection, 0),
+		Upgrader:    websocket.Upgrader{},
+		Addr:        flag.String("addr", "localhost:8080", "http service address"),
+	}
 )
 
 func Start() {
-	http.HandleFunc("/ws", connectionHandler)
-	readMessages()
-	err := http.ListenAndServe(*addr, nil)
+	r := gin.Default()
+	r.GET("/ws", func(c *gin.Context) {
+		connectionHandler(c.Writer, c.Request)
+	})
+	r.POST("/api/v1/auth/register", route.Register())
+	r.POST("/api/v1/auth/login", route.Login())
+	go readMessages()
+	err := r.Run(*server.Addr)
 	if err != nil {
 		logrus.Fatal(err)
 	}
 }
-func (s *Server) HandleMessage(msg connection.Message) {
+func (s *Server) HandleMessage(msg connection.Message) bool {
 	s.Messages <- msg
+	return false
+}
+func (s *Server) ConnectionClosed(conn *connection.Connection) bool {
+	conn.Conn.Close()
+	logrus.Infof("Connection from %v closed", conn.Conn.RemoteAddr())
+	for i, c := range s.Connections {
+		if c == conn {
+			s.Connections = append(s.Connections[:i], s.Connections[i+1:]...)
+			break
+		}
+	}
+	return false
 }
 
 func connectionHandler(w http.ResponseWriter, r *http.Request) {
-	conn, err := upgrader.Upgrade(w, r, nil)
+	conn, err := server.Upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		logrus.Errorf("Failed to upgrade connection: %v", err)
 		return
@@ -41,23 +65,19 @@ func connectionHandler(w http.ResponseWriter, r *http.Request) {
 		conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "Authentication token is invalid"))
 		conn.Close()
 		logrus.Infof("Connection from %v closed due to invalid token", conn.RemoteAddr())
-
 		return
 	}
 	logrus.Infof("New connection from %v", conn.RemoteAddr())
-	connections = append(connections, connection.NewConnection(conn, &server))
+	c := connection.NewConnection(conn)
+	c.AddConnectionHandler(&server, true)
+	server.Connections = append(server.Connections, c)
 }
 
 func readMessages() {
-	go func() {
-		for {
-			message := <-server.Messages
-			logrus.Infof("Received message: %v", string(message.Msg))
-			go func() {
-				for {
-					message.Conn.SendMessage([]byte(message.Msg))
-				}
-			}()
-		}
-	}()
+	for {
+		message := <-server.Messages
+		go func() {
+			message.Conn.SendMessage([]byte(message.Msg))
+		}()
+	}
 }

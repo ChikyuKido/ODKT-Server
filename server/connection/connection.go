@@ -5,14 +5,15 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type MessageHandler interface {
-	HandleMessage(msg Message)
+type ConnectionHandler interface {
+	HandleMessage(msg Message) bool
+	ConnectionClosed(conn *Connection) bool
 }
 
 type Connection struct {
-	conn       *websocket.Conn
-	msgHandler MessageHandler
-	send       chan []byte
+	Conn               *websocket.Conn
+	connectionHandlers []ConnectionHandler
+	send               chan []byte
 }
 
 type Message struct {
@@ -20,36 +21,53 @@ type Message struct {
 	Msg  []byte
 }
 
-func NewConnection(conn *websocket.Conn, handler MessageHandler) *Connection {
+func NewConnection(conn *websocket.Conn) *Connection {
 	con := Connection{
-		conn:       conn,
-		msgHandler: handler,
-		send:       make(chan []byte),
+		Conn: conn,
+		send: make(chan []byte),
 	}
 	go con.readMessage()
 	go con.writeMessages()
 	return &con
 }
-
-func (c *Connection) readMessage() {
-	defer func() {
-		err := c.conn.Close()
-		if err != nil {
-			logrus.Errorf("Error closing connection: %v", err)
+func (c *Connection) AddConnectionHandler(handler ConnectionHandler, first bool) {
+	if first {
+		c.connectionHandlers = append(c.connectionHandlers[:0], append([]ConnectionHandler{handler}, c.connectionHandlers[:0]...)...)
+	} else {
+		c.connectionHandlers = append(c.connectionHandlers, handler)
+	}
+}
+func (c *Connection) RemoveConnectionHandler(handler ConnectionHandler) {
+	for i, h := range c.connectionHandlers {
+		if h == handler {
+			c.connectionHandlers = append(c.connectionHandlers[:i], c.connectionHandlers[i+1:]...)
+			break
 		}
-	}()
+	}
+}
+func (c *Connection) readMessage() {
 	for {
-		_, message, err := c.conn.ReadMessage()
+		_, message, err := c.Conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				logrus.Errorf("Client %s unexpectedly closed the connection: %v", c.conn.RemoteAddr().String(), err)
+				logrus.Errorf("Client %s unexpectedly closed the connection: %v", c.Conn.RemoteAddr().String(), err)
+			}
+			for _, h := range c.connectionHandlers {
+				if h.ConnectionClosed(c) {
+					break
+				}
 			}
 			break
 		}
-		c.msgHandler.HandleMessage(Message{
-			Conn: c,
-			Msg:  message,
-		})
+		for _, h := range c.connectionHandlers {
+			if h.HandleMessage(Message{
+				Conn: c,
+				Msg:  message,
+			}) {
+				break
+			}
+		}
+
 	}
 }
 
@@ -62,12 +80,15 @@ func (c *Connection) SendMessage(message []byte) {
 }
 
 func (c *Connection) writeMessages() {
-	defer c.conn.Close()
-
 	for message := range c.send {
-		err := c.conn.WriteMessage(websocket.TextMessage, message)
+		err := c.Conn.WriteMessage(websocket.TextMessage, message)
 		if err != nil {
 			logrus.Errorf("Error writing message: %v", err)
+			for _, h := range c.connectionHandlers {
+				if h.ConnectionClosed(c) {
+					break
+				}
+			}
 			break
 		}
 	}
