@@ -1,0 +1,194 @@
+[streets]
+[[streets.entry]]
+city = "Bregenz"
+name = "Amtsplatz"
+rent = [20, 100, 300, 600, 750, 950]
+price = 220
+price_house = 160
+price_hotel = 160
+
+[[streets.entry]]
+city = "Graz"
+name = "Murplatz"
+rent = [30, 150, 450, 850, 1060, 1200]
+price = 300
+price_house = 200
+price_hotel = 200
+
+[[streets.entry]]
+city = "Graz"
+name = "Annenstraße"
+rent = [24, 110, 330, 700, 900, 1050]
+price = 250
+price_house = 150
+price_hotel = 150
+
+[[streets.entry]]
+city = "Graz"
+name = "Joasneumring"
+rent = [20, 100, 300, 600, 750, 950]
+price = 220
+price_house = 130
+price_hotel = 130
+
+[[streets.entry]]
+city = "Eisenstadt"
+name = "Jos. Haydngasse"
+rent = [6, 30,90, 260, 380, 550]
+price = 100
+price_house = 50
+price_hotel = 50
+
+[[streets.entry]]
+city = "Eisenstadt"
+name = "Schloßgrund"
+rent = [20, 100,300, 600, 750, 950]
+price = 220
+price_house = 160
+price_hotel = 160
+
+[[streets.entry]]
+city = "Wien"
+name = "Kärntnerstraße"
+rent = [50, 200,600, 1300, 1600, 1950]
+price = 380
+price_house = 220
+price_hotel = 220
+
+[[streets.entry]]
+city = "Wien"
+name = "Mariahilferstraße"
+rent = [40, 170,500,1000,1300,1600]
+price = 350
+price_house = 220
+price_hotel = 220
+
+[[streets.entry]]
+city = "Wien"
+name = "Kobenzlestraße"
+rent = [24,110,330,700,900,1050]
+price = 250
+price_house = 150
+price_hotel = 140
+
+[[streets.entry]]
+city = "Linz"
+name = "Landstraße"
+rent = [14,70,210,500,700,850]
+price = 180
+price_house = 100
+price_hotel = 100
+
+[[streets.entry]]
+city = "Linz"
+name = "Stifterstraße"
+rent = [20,100,300,600,750,950]
+price = 220
+price_house = 160
+price_hotel = 160
+
+[[streets.entry]]
+city = "Linz"
+name = "Museumstraße"
+rent = [22,100,320,780,90,1100]
+price = 250
+price_house = 150
+price_hotel = 150
+
+[[streets.entry]]
+city = "Salzburg"
+name = "Mirabellplatz"
+rent = [24,110,330,700,900,1050]
+price = 250
+price_house = 150
+price_hotel = 140
+
+[[streets.entry]]
+city = "Salzburg"
+name = "Westbahnstraße"
+rent = [22,100,320,680,850,1000]
+price = 240
+price_house = 140
+price_hotel = 130
+
+[[streets.entry]]
+city = "Salzburg"
+name = "Universitätsplatz"
+rent = [24,110,330,700,900,1050]
+price = 250
+price_house = 150
+price_hotel = 140
+
+[[streets.entry]]
+city = "Klagenfurt"
+name = "Burggasse"
+rent = [10,50,150,450,600,730]
+price = 140
+price_house = 100
+price_hotel = 100
+
+[[streets.entry]]
+city = "Klagenfurt"
+name = "Villacherstraße"
+rent = [16,80,230,550,710,900]
+price = 200
+price_house = 110
+price_hotel = 110
+
+[[streets.entry]]
+city = "Klagenfurt"
+name = "Alter Platz"
+rent = [18,90,250,600,730,930]
+price = 210
+price_house = 120
+price_hotel = 150
+
+[[streets.entry]]
+city = "Innsbruck"
+name = "M.-Theresienstr"
+rent = [30,150,450,850,1050,1200]
+price = 300
+price_house = 200
+price_hotel = 200
+
+[[streets.entry]]
+city = "Innsbruck"
+name = "Andreas Hoferstr."
+rent = [24,110,330,700,900,1050]
+price = 250
+price_house = 150
+price_hotel = 140
+
+[[streets.entry]]
+city = "Innsbruck"
+name = "Boznerplatz"
+rent = [30,150,450,850,1050,1200]
+price = 300
+price_house = 200
+price_hotel = 200
+
+[[streets.entry]]
+city = "Bregenz"
+name = "Arlbergstraße"
+rent = [8,40,100,300,450,600]
+price = 120
+price_house = 50
+price_hotel = 50
+
+[[streets.entry]]
+city = "Bregenz"
+name = "Rathausstraße"
+rent = [14,70,210,500,700,850]
+price = 180
+price_house = 100
+price_hotel = 100
+
+[colors]
+bregenz = "#555861"
+innsbruck = "#0a6a8e"
+klagenfurt = "#e69d66"
+salzburg = "#a99522"
+linz = "#4b6e4d"
+wien = "#e94955"
+eisenstadt = "#946e5a"
+graz = "#937554"

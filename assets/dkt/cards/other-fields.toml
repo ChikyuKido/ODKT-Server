@@ -1,0 +1,17 @@
+[other-fields]
+[[other-fields.entry]]
+name = "start"
+[[other-fields.entry]]
+name = "chance"
+[[other-fields.entry]]
+name = "sparkassa"
+[[other-fields.entry]]
+name = "gesetzesverletzung"
+[[other-fields.entry]]
+percent = 10
+maximum = 350
+name = "vermögendsabgabe"
+[[other-fields.entry]]
+name = "gefängnis"
+[[other-fields.entry]]
+name = "erwerbssteuer"

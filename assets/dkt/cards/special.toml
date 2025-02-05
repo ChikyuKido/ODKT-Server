@@ -1,19 +1,19 @@
-[spezial]
+[special]
 start = 5
 multiplier = 2
 text = "Wer auf dieses Feld zu stehen kommt, \n hat Dir die %d fache, besitzt Du auch \n das Feld %d (%s) oder das Feld \n %d (%s), die \n %d fache, hast Du beide Felder %d \n und %d, die %d fache gewürfelte \n Punktezahl zu bezahlen."
 
-[[spezial.entry]]
+[[specials.entry]]
 name = "Elektrisches Kraftwerk"
-preis = 160
-preis_name = "Preis des Kraftwerkes"
+price = 160
+price_name = "Preis des Kraftwerkes"
 
-[[spezial.entry]]
+[[specials.entry]]
 name = "Seilbahn"
-preis = 160
-preis_name = "Preis der Seilbahn"
+price = 160
+price_name = "Preis der Seilbahn"
 
-[[spezial.entry]]
+[[specials.entry]]
 name = "Wien - Venedig"
-preis = 160
-preis_name = "Preis der Fluglinie"
+price = 160
+price_name = "Preis der Fluglinie"

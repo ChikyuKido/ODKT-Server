@@ -1,0 +1,20 @@
+[railroad]
+start = 20
+multiplier = 2
+text = "Besitzt Du von den railroadsn \n %d, %d, %d, %d nur eine, erhältst Du \n an Fahrgeld"
+
+[[railroads.entry]]
+price = 160
+name = "Wien-Graz"
+
+[[railroads.entry]]
+price = 160
+name = "Wien-Budapest"
+
+[[railroads.entry]]
+price = 160
+name = "Wien-Innsbruck"
+
+[[railroads.entry]]
+price = 160
+name = "Glocknerstraße"

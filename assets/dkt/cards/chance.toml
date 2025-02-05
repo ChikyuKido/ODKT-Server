@@ -1,78 +1,78 @@
 [chance]
-typen = ["zahle","haus-reperatur","grundsteuer","gehe","erhalte","hebe"]
+types = ["pay","house-repair","land-tax","move","receive","hold"]
 
-[[chance.entry]]
-typ = "zahle"
+[[chances.entry]]
+type = "pay"
 text = "Die Bank zahlt \n Dir \n an Dividenden \n 60,-"
-wert = 60
+value = 60
 
-[[chance.entry]]
-typ = "zahle"
+[[chances.entry]]
+type = "pay"
 text = "Für \n Autoreperatur \n zahle \n 140,-"
-wert = 140
+value = 140
 
-[[chance.entry]]
-typ = "zahle"
+[[chances.entry]]
+type = "pay"
 text = "Für unerlaubter \n Parken \n bezahlst Du \n 10,-"
-wert = 10
+value = 10
 
-[[chance.entry]]
-typ = "erhalte"
+[[chances.entry]]
+type = "receive"
 text = "Für den Bau \n erhälsts Du \n 140,- \n Bundeszuschuß"
-wert = 140
+value = 140
 
-[[chance.entry]]
-typ = "gehe"
+[[chances.entry]]
+type = "move"
 text = "Gehe auf Feld 22 \n Passierst Du den \n Start erhältst Du \n 200,-"
-feld = "f22"
+field = "f22"
 
-[[chance.entry]]
-typ = "zahle"
+[[chances.entry]]
+type = "pay"
 text = "Für \n Unfallversicherungen \n bezahlst Du \n 20,-"
-wert = 20
+value = 20
 
-[[chance.entry]]
-typ = "haus-reperatur"
+[[chances.entry]]
+type = "house-repair"
 text = "Für jedes haus in \n Deinem Besitz bezahlst \n Du an Reperaturkosten \n 20,- \n für jedes Hotel \n 80,-"
-haus = 20
+house = 20
 hotel = 80
 
-[[chance.entry]]
-typ = "hebe"
+[[chances.entry]]
+type = "hold"
 text = "Diese Karte befreit \n Dich aus dem Arrest ! \n ------------ \n Hebe diese Karte \n auf Du wirst sie \n brauchen"
-aktion = "befreie-arrest"
+action = "befreie-arrest"
 
-[[chance.entry]]
-typ = "grundsteuer"
+[[chances.entry]]
+type = "land-tax"
 text = "An Grundsteuer \n zahlst Du für deine \n Grundstücke \n 10% vom Kaufwert"
-wert = 10
+value = 10
 
-[[chance.entry]]
-typ = "gehe"
+[[chances.entry]]
+type = "move"
 text = "Gehe in den \n Arrest"
-feld = "farrest"
+field = "farrest"
 
-[[chance.entry]]
-typ = "gehe"
+[[chances.entry]]
+type = "move"
 text = "Gehe zurück um \n 4 Felder"
-feld = "f-4"
+field = "f-4"
 
-[[chance.entry]]
-typ = "zahle"
+[[chances.entry]]
+type = "pay"
 text = "Zahle \n 5,- \n Polizeistrafe"
-wert = 5
+value = 5
 
-[[chance.entry]]
-typ = "gehe"
+[[chances.entry]]
+type = "move"
 text = "Besuche Graz und \n gehe in der \n Annenstraße spazieren. \n Passierst Du den \n Start erhälst du \n 200,-"
-feld = "s1002"
+field = "s1002"
 
-[[chance.entry]]
-typ = "gehe"
+[[chances.entry]]
+type = "move"
 text = "Besuche Salzburg \n und gehe auf dem \n Mirabellplatz spazieren. \n Passierst Du den \n Start erhälst du \n 200,-"
-feld = "s1012"
+field = "s1012"
 
-[[chance.entry]]
-typ = "gehe"
+[[chances.entry]]
+type = "move"
 text = "Fahre mit dem \n Flugzeug \n Wien - Venedig \n Passierst Du den \n Start erhälst du \n 200,-"
-feld = "s3002"
+field = "s3002"

@@ -5,7 +5,6 @@ import (
 	"encoding/binary"
 	"github.com/pelletier/go-toml"
 	"github.com/sirupsen/logrus"
-	"log"
 	"odkt/server/db/entity"
 	"odkt/server/db/repo"
 	"odkt/server/util"
@@ -22,31 +21,31 @@ func ImportCardsToDB() {
 }
 
 func importCardChance() {
-	tree, err := toml.LoadFile("assets/cards/chance.toml")
+	tree, err := toml.LoadFile("assets/dkt/cards/chance.toml")
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatalf("Failed to load file %v", err)
 	}
-	types := util.ConvertToStringArray(tree.Get("chance.typen").([]interface{}))
+	types := util.ConvertToStringArray(tree.Get("chance.types").([]interface{}))
 	if err := repo.InsertSetting("card_chance", []byte(strings.Join(types, ","))); err != nil {
 		logrus.Fatalf("Failed to add chance settings: %v", err)
 	}
-	entries := tree.Get("chance.entry").([]*toml.Tree)
+	entries := tree.Get("chances.entry").([]*toml.Tree)
 	for _, entry := range entries {
 		entryMap := entry.ToMap()
 		cardChance := entity.CardChance{
-			Type: getString(entryMap, "typ"),
+			Type: getString(entryMap, "type"),
 			Text: getString(entryMap, "text"),
 		}
 		var payload []byte
-		if cardChance.Type == "zahle" || cardChance.Type == "erhalte" || cardChance.Type == "grundsteuer" {
-			payload = intToBytes(getInt(entryMap, "wert"))
-		} else if cardChance.Type == "gehe" {
-			payload = []byte(getString(entryMap, "feld"))
-		} else if cardChance.Type == "haus-reperatur" {
-			payload = intToBytes(getInt(entryMap, "haus"))
+		if cardChance.Type == "pay" || cardChance.Type == "receive" || cardChance.Type == "land-tax" {
+			payload = intToBytes(getInt(entryMap, "value"))
+		} else if cardChance.Type == "move" {
+			payload = []byte(getString(entryMap, "field"))
+		} else if cardChance.Type == "house-repair" {
+			payload = intToBytes(getInt(entryMap, "house"))
 			payload = append(payload, intToBytes(getInt(entryMap, "hotel"))...)
-		} else if cardChance.Type == "hebe" {
-			payload = []byte(getString(entryMap, "aktion"))
+		} else if cardChance.Type == "hold" {
+			payload = []byte(getString(entryMap, "action"))
 		}
 		cardChance.Payload = payload
 		if err := repo.InsertCardChance(cardChance); err != nil {
@@ -56,26 +55,26 @@ func importCardChance() {
 }
 
 func importCardBank() {
-	tree, err := toml.LoadFile("assets/cards/sparkassa.toml")
+	tree, err := toml.LoadFile("assets/dkt/cards/bank.toml")
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatalf("Failed to load file %v", err)
 	}
-	types := util.ConvertToStringArray(tree.Get("sparkassa.typen").([]interface{}))
+	types := util.ConvertToStringArray(tree.Get("bank.types").([]interface{}))
 	if err := repo.InsertSetting("card_bank", []byte(strings.Join(types, ","))); err != nil {
 		logrus.Fatalf("Failed to add bank settings: %v", err)
 	}
-	entries := tree.Get("sparkassa.entry").([]*toml.Tree)
+	entries := tree.Get("banks.entry").([]*toml.Tree)
 	for _, entry := range entries {
 		entryMap := entry.ToMap()
 		cardBank := entity.CardBank{
-			Type: getString(entryMap, "typ"),
+			Type: getString(entryMap, "type"),
 			Text: getString(entryMap, "text"),
 		}
 		var payload []byte
-		if cardBank.Type == "zahle" || cardBank.Type == "erhalte" {
-			payload = intToBytes(getInt(entryMap, "wert"))
-		} else if cardBank.Type == "gehe" {
-			payload = []byte(getString(entryMap, "feld"))
+		if cardBank.Type == "pay" || cardBank.Type == "receive" {
+			payload = intToBytes(getInt(entryMap, "value"))
+		} else if cardBank.Type == "move" {
+			payload = []byte(getString(entryMap, "field"))
 		}
 		cardBank.Payload = payload
 		if err := repo.InsertCardBank(cardBank); err != nil {
@@ -85,11 +84,11 @@ func importCardBank() {
 }
 
 func importCardSpecial() {
-	tree, err := toml.LoadFile("assets/cards/spezial.toml")
+	tree, err := toml.LoadFile("assets/dkt/cards/special.toml")
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatalf("Failed to load file %v", err)
 	}
-	entryMap := tree.ToMap()["spezial"].(map[string]interface{})
+	entryMap := tree.ToMap()["special"].(map[string]interface{})
 	start := intToBytes(getInt(entryMap, "start"))
 	multiplier := intToBytes(getInt(entryMap, "multiplier"))
 	text := []byte(getString(entryMap, "text"))
@@ -99,13 +98,13 @@ func importCardSpecial() {
 	if err := repo.InsertSetting("card_special", payload); err != nil {
 		logrus.Fatalf("Failed to add special settings: %v", err)
 	}
-	entries := tree.Get("spezial.entry").([]*toml.Tree)
+	entries := tree.Get("specials.entry").([]*toml.Tree)
 	for _, entry := range entries {
 		entryMap := entry.ToMap()
 		cardSpecial := entity.CardSpecial{
 			Name:      getString(entryMap, "name"),
-			Price:     getInt(entryMap, "preis"),
-			PriceName: getString(entryMap, "preis_name"),
+			Price:     getInt(entryMap, "price"),
+			PriceName: getString(entryMap, "price_name"),
 		}
 
 		if err := repo.InsertCardSpecial(cardSpecial); err != nil {
@@ -115,20 +114,20 @@ func importCardSpecial() {
 }
 
 func importCardStreet() {
-	tree, err := toml.LoadFile("assets/cards/strasse.toml")
+	tree, err := toml.LoadFile("assets/dkt/cards/street.toml")
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatalf("Failed to load file %v", err)
 	}
-	entries := tree.Get("strassen.entry").([]*toml.Tree)
+	entries := tree.Get("streets.entry").([]*toml.Tree)
 	for _, entry := range entries {
 		entryMap := entry.ToMap()
 		cardStreet := entity.CardStreet{
-			City:       getString(entryMap, "stadt"),
+			City:       getString(entryMap, "city"),
 			Name:       getString(entryMap, "name"),
-			Rent:       util.ConvertIntArrayToString(util.ConvertToIntArray(entryMap["miete"].([]interface{})), ","),
-			Price:      getInt(entryMap, "preis"),
-			HousePrice: getInt(entryMap, "preis_haus"),
-			HotelPrice: getInt(entryMap, "preis_hotel"),
+			Rent:       util.ConvertIntArrayToString(util.ConvertToIntArray(entryMap["rent"].([]interface{})), ","),
+			Price:      getInt(entryMap, "price"),
+			HousePrice: getInt(entryMap, "price_house"),
+			HotelPrice: getInt(entryMap, "price_hotel"),
 		}
 		if err := repo.InsertCardStreet(cardStreet); err != nil {
 			logrus.Fatalf("Failed to add street: %v", err)
@@ -137,11 +136,11 @@ func importCardStreet() {
 }
 
 func importCardRailroad() {
-	tree, err := toml.LoadFile("assets/cards/verkehrslinie.toml")
+	tree, err := toml.LoadFile("assets/dkt/cards/railroad.toml")
 	if err != nil {
-		logrus.Fatal(err)
+		logrus.Fatalf("Failed to load file %v", err)
 	}
-	entryMap := tree.ToMap()["verkehrslinie"].(map[string]interface{})
+	entryMap := tree.ToMap()["railroad"].(map[string]interface{})
 	start := intToBytes(getInt(entryMap, "start"))
 	multiplier := intToBytes(getInt(entryMap, "multiplier"))
 	text := []byte(getString(entryMap, "text"))
@@ -151,12 +150,12 @@ func importCardRailroad() {
 	if err := repo.InsertSetting("card_railroad", payload); err != nil {
 		logrus.Fatalf("Failed to add railroad settings: %v", err)
 	}
-	entries := tree.Get("verkehrslinie.entry").([]*toml.Tree)
+	entries := tree.Get("railroads.entry").([]*toml.Tree)
 	for _, entry := range entries {
 		entryMap := entry.ToMap()
 		cardRailroad := entity.CardRailroad{
 			Name:  getString(entryMap, "name"),
-			Price: getInt(entryMap, "preis"),
+			Price: getInt(entryMap, "price"),
 		}
 		if err := repo.InsertCardRailroad(cardRailroad); err != nil {
 			logrus.Fatalf("Failed to add special: %v", err)
@@ -164,11 +163,11 @@ func importCardRailroad() {
 	}
 }
 func importCardOther() {
-	tree, err := toml.LoadFile("assets/cards/andere.toml")
+	tree, err := toml.LoadFile("assets/dkt/cards/other-fields.toml")
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatalf("Failed to load file %v", err)
 	}
-	entries := tree.Get("andere.entry").([]*toml.Tree)
+	entries := tree.Get("other-fields.entry").([]*toml.Tree)
 	for _, entry := range entries {
 		entryMap := entry.ToMap()
 		cardOther := entity.CardOther{
@@ -176,8 +175,8 @@ func importCardOther() {
 		}
 		var payload []byte
 		if cardOther.Name == "vermögendsabgabe" {
-			payload = intToBytes(getInt(entryMap, "prozent"))
-			payload = append(payload, intToBytes(getInt(entryMap, "maximal"))...)
+			payload = intToBytes(getInt(entryMap, "percent"))
+			payload = append(payload, intToBytes(getInt(entryMap, "maximum"))...)
 		}
 		cardOther.Payload = payload
 		if err := repo.InsertCardOther(cardOther); err != nil {

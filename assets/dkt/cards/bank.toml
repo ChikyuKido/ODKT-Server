@@ -1,78 +1,78 @@
-[sparkassa]
-typen = ["zahle", "gehe", "erhalte"]
+[bank]
+types = ["pay", "move", "receive"]
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "Für Bankzinsen \n erhältst Du \n 180,-"
-wert = 180
+value = 180
 
-[[sparkassa.entry]]
-typ = "gehe"
+[[banks.entry]]
+type = "move"
 text = "Geh zum Start \n und hebe \n 200,- ab"
-feld = "fstart"
+field = "fstart"
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "Die Bank \n bezahlt Dir \n an Zinsen \n 25,-"
-wert = 25
+value = 25
 
-[[sparkassa.entry]]
-typ = "zahle"
+[[banks.entry]]
+type = "pay"
 text = "Wegen Überschreitung \n der Fahrordnung \n bezahle \n 15,-"
-wert = 15
+value = 15
 
-[[sparkassa.entry]]
-typ = "zahle"
+[[banks.entry]]
+type = "pay"
 text = "Bezahle Deine \n Lebensversicherungs- \n Prämie \n 120,-"
-wert = 120
+value = 120
 
-[[sparkassa.entry]]
-typ = "erhalte"
-text = "Für den Verkauf \n von Wertpapieren \n erhältst Du \n 50,-"
-wert = 50
+[[banks.entry]]
+type = "receive"
+text = "Für den Verkauf \n von valuepapieren \n erhältst Du \n 50,-"
+value = 50
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "An Reisespesen- \n beitrag erhältst Du \n 40,-"
-wert = 40
+value = 40
 
-[[sparkassa.entry]]
-typ = "zahle"
+[[banks.entry]]
+type = "pay"
 text = "Für Gehsteigreinigung \n bezahle \n 40,-"
-wert = 40
+value = 40
 
-[[sparkassa.entry]]
-typ = "zahle"
+[[banks.entry]]
+type = "pay"
 text = "An die \n Krankenkasse \n bezahle \n 130,-"
-wert = 130
+value = 130
 
-[[sparkassa.entry]]
-typ = "gehe"
+[[banks.entry]]
+type = "move"
 text = "Gehe in den \n Arrest"
-feld = "farrest"
+field = "farrest"
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "Für eine \n Geschäftsvermittlung \n erhältst Du \n 20,- \n Provision"
-wert = 20
+value = 20
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "In der \n Klassenlotterie \n hast Du \n 20,- \n gewonnen"
-wert = 20
+value = 20
 
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "An Umsatzsteuer- \n Rückvergütungen \n erhältst DU \n 35,-"
-wert = 35
+value = 35
 
-[[sparkassa.entry]]
-typ = "zahle"
+[[banks.entry]]
+type = "pay"
 text = "Kauf Dir ein Los \n der Klassenlotterie \n und bezahle \n 48,-"
-wert = 48
+value = 48
 
-[[sparkassa.entry]]
-typ = "erhalte"
+[[banks.entry]]
+type = "receive"
 text = "Für eine \n gewonnene Wette \n erhälst Du \n 120,-"
-wert = 120
+value = 120

@@ -1,5 +1,5 @@
 [brett]
-
+types = ["street","special","railroad","other-fields"]
 [feld]
 [[feld.entry]]
 id = 0
