@@ -35,3 +35,17 @@ func InsertCardStreet(card entity.CardStreet) error {
 	}
 	return nil
 }
+
+func InsertCardRailroad(card entity.CardRailroad) error {
+	if err := db.DB().Create(&card).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func InsertCardOther(card entity.CardOther) error {
+	if err := db.DB().Create(&card).Error; err != nil {
+		return err
+	}
+	return nil
+}

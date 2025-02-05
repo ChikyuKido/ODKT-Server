@@ -17,6 +17,8 @@ func ImportCardsToDB() {
 	importCardBank()
 	importCardSpecial()
 	importCardStreet()
+	importCardRailroad()
+	importCardOther()
 }
 
 func importCardChance() {
@@ -105,6 +107,7 @@ func importCardSpecial() {
 			Price:     getInt(entryMap, "preis"),
 			PriceName: getString(entryMap, "preis_name"),
 		}
+
 		if err := repo.InsertCardSpecial(cardSpecial); err != nil {
 			logrus.Fatalf("Failed to add special: %v", err)
 		}
@@ -129,6 +132,56 @@ func importCardStreet() {
 		}
 		if err := repo.InsertCardStreet(cardStreet); err != nil {
 			logrus.Fatalf("Failed to add street: %v", err)
+		}
+	}
+}
+
+func importCardRailroad() {
+	tree, err := toml.LoadFile("assets/cards/verkehrslinie.toml")
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	entryMap := tree.ToMap()["verkehrslinie"].(map[string]interface{})
+	start := intToBytes(getInt(entryMap, "start"))
+	multiplier := intToBytes(getInt(entryMap, "multiplier"))
+	text := []byte(getString(entryMap, "text"))
+	payload := start
+	payload = append(payload, multiplier...)
+	payload = append(payload, text...)
+	if err := repo.InsertSetting("card_railroad", payload); err != nil {
+		logrus.Fatalf("Failed to add railroad settings: %v", err)
+	}
+	entries := tree.Get("verkehrslinie.entry").([]*toml.Tree)
+	for _, entry := range entries {
+		entryMap := entry.ToMap()
+		cardRailroad := entity.CardRailroad{
+			Name:  getString(entryMap, "name"),
+			Price: getInt(entryMap, "preis"),
+		}
+		if err := repo.InsertCardRailroad(cardRailroad); err != nil {
+			logrus.Fatalf("Failed to add special: %v", err)
+		}
+	}
+}
+func importCardOther() {
+	tree, err := toml.LoadFile("assets/cards/andere.toml")
+	if err != nil {
+		log.Fatal(err)
+	}
+	entries := tree.Get("andere.entry").([]*toml.Tree)
+	for _, entry := range entries {
+		entryMap := entry.ToMap()
+		cardOther := entity.CardOther{
+			Name: getString(entryMap, "name"),
+		}
+		var payload []byte
+		if cardOther.Name == "vermögendsabgabe" {
+			payload = intToBytes(getInt(entryMap, "prozent"))
+			payload = append(payload, intToBytes(getInt(entryMap, "maximal"))...)
+		}
+		cardOther.Payload = payload
+		if err := repo.InsertCardOther(cardOther); err != nil {
+			logrus.Fatalf("Failed to add special: %v", err)
 		}
 	}
 }
