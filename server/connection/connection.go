@@ -3,6 +3,7 @@ package connection
 import (
 	"github.com/gorilla/websocket"
 	"github.com/sirupsen/logrus"
+	"odkt/server/db/entity"
 )
 
 type ConnectionHandler interface {
@@ -13,6 +14,7 @@ type ConnectionHandler interface {
 type Connection struct {
 	Conn               *websocket.Conn
 	connectionHandlers []ConnectionHandler
+	User               *entity.User
 	send               chan []byte
 }
 

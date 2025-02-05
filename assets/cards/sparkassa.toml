@@ -1,99 +1,78 @@
-[chance]
+[sparkassa]
 typen = ["zahle", "gehe", "erhalte"]
 
-[[chance.entry]]
-id = 11000
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "Für Bankzinsen \n erhältst Du \n 180,-"
 wert = 180
 
-[[chance.entry]]
-id = 11001
+[[sparkassa.entry]]
 typ = "gehe"
 text = "Geh zum Start \n und hebe \n 200,- ab"
-gehe = "fstart"
+feld = "fstart"
 
-[[chance.entry]]
-id = 11002
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "Die Bank \n bezahlt Dir \n an Zinsen \n 25,-"
 wert = 25
 
-[[chance.entry]]
-id = 11003
+[[sparkassa.entry]]
 typ = "zahle"
 text = "Wegen Überschreitung \n der Fahrordnung \n bezahle \n 15,-"
 wert = 15
 
-[[chance.entry]]
-id = 11004
+[[sparkassa.entry]]
 typ = "zahle"
 text = "Bezahle Deine \n Lebensversicherungs- \n Prämie \n 120,-"
 wert = 120
 
-[[chance.entry]]
-id = 11005
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "Für den Verkauf \n von Wertpapieren \n erhältst Du \n 50,-"
 wert = 50
 
-[[chance.entry]]
-id = 11006
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "An Reisespesen- \n beitrag erhältst Du \n 40,-"
 wert = 40
 
-[[chance.entry]]
-id = 11007
+[[sparkassa.entry]]
 typ = "zahle"
 text = "Für Gehsteigreinigung \n bezahle \n 40,-"
 wert = 40
 
-[[chance.entry]]
-id = 11008
+[[sparkassa.entry]]
 typ = "zahle"
 text = "An die \n Krankenkasse \n bezahle \n 130,-"
 wert = 130
 
-[[chance.entry]]
-id = 11009
+[[sparkassa.entry]]
 typ = "gehe"
 text = "Gehe in den \n Arrest"
 feld = "farrest"
 
-[[chance.entry]]
-id = 11010
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "Für eine \n Geschäftsvermittlung \n erhältst Du \n 20,- \n Provision"
 wert = 20
 
-[[chance.entry]]
-id = 11011
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "In der \n Klassenlotterie \n hast Du \n 20,- \n gewonnen"
 wert = 20
 
 
-[[chance.entry]]
-id = 11012
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "An Umsatzsteuer- \n Rückvergütungen \n erhältst DU \n 35,-"
 wert = 35
 
-[[chance.entry]]
-id = 11013
+[[sparkassa.entry]]
 typ = "zahle"
 text = "Kauf Dir ein Los \n der Klassenlotterie \n und bezahle \n 48,-"
 wert = 48
 
-[[chance.entry]]
-id = 11014
+[[sparkassa.entry]]
 typ = "erhalte"
 text = "Für eine \n gewonnene Wette \n erhälst Du \n 120,-"
 wert = 120
-
-
-
-
-
-

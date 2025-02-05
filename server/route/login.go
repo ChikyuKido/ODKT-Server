@@ -1,10 +1,16 @@
 package route
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"net/http"
+	"odkt/server/db/entity"
+	"odkt/server/db/repo"
+	"odkt/server/util"
+	"strings"
 )
+
+var LoginTokens = map[string]*entity.User{}
 
 func Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -16,13 +22,25 @@ func Login() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		fmt.Println(requestData)
-		if requestData.Username == "" || requestData.Password == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "username and password are incorrect"})
+		if strings.TrimSpace(requestData.Username) == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "username must not be empty"})
 			return
 		}
-		//Todo: login
-
-		c.JSON(http.StatusOK, gin.H{"token": "toke"})
+		if strings.TrimSpace(requestData.Password) == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "password must not be empty"})
+			return
+		}
+		user := repo.GetUserByUsername(requestData.Username)
+		if user == nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "bad credentials"})
+			return
+		}
+		if !util.CheckPassword(user.Password, requestData.Password) {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "bad credentials"})
+			return
+		}
+		id := uuid.New()
+		LoginTokens[id.String()] = user
+		c.JSON(http.StatusOK, gin.H{"token": id.String()})
 	}
 }

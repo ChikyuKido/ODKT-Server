@@ -4,19 +4,16 @@ multiplier = 2
 text = "Wer auf dieses Feld zu stehen kommt, \n hat Dir die %d fache, besitzt Du auch \n das Feld %d (%s) oder das Feld \n %d (%s), die \n %d fache, hast Du beide Felder %d \n und %d, die %d fache gewürfelte \n Punktezahl zu bezahlen."
 
 [[spezial.entry]]
-id = 3000
 name = "Elektrisches Kraftwerk"
 preis = 160
 preis_name = "Preis des Kraftwerkes"
 
 [[spezial.entry]]
-id = 3001
 name = "Seilbahn"
 preis = 160
 preis_name = "Preis der Seilbahn"
 
 [[spezial.entry]]
-id = 3002
 name = "Wien - Venedig"
 preis = 160
 preis_name = "Preis der Fluglinie"

@@ -1,6 +1,5 @@
 [strassen]
 [[strassen.entry]]
-id = 1000
 stadt = "Bregenz"
 name = "Amtsplatz"
 miete = [20, 100, 300, 600, 750, 950]
@@ -9,7 +8,6 @@ preis_haus = 160
 preis_hotel = 160
 
 [[strassen.entry]]
-id = 1001
 stadt = "Graz"
 name = "Murplatz"
 miete = [30, 150, 450, 850, 1060, 1200]
@@ -18,7 +16,6 @@ preis_haus = 200
 preis_hotel = 200
 
 [[strassen.entry]]
-id = 1002
 stadt = "Graz"
 name = "Annenstraße"
 miete = [24, 110, 330, 700, 900, 1050]
@@ -27,7 +24,6 @@ preis_haus = 150
 preis_hotel = 150
 
 [[strassen.entry]]
-id = 1003
 stadt = "Graz"
 name = "Joasneumring"
 miete = [20, 100, 300, 600, 750, 950]
@@ -36,7 +32,6 @@ preis_haus = 130
 preis_hotel = 130
 
 [[strassen.entry]]
-id = 1004
 stadt = "Eisenstadt"
 name = "Jos. Haydngasse"
 miete = [6, 30,90, 260, 380, 550]
@@ -45,7 +40,6 @@ preis_haus = 50
 preis_hotel = 50
 
 [[strassen.entry]]
-id = 1005
 stadt = "Eisenstadt"
 name = "Schloßgrund"
 miete = [20, 100,300, 600, 750, 950]
@@ -54,7 +48,6 @@ preis_haus = 160
 preis_hotel = 160
 
 [[strassen.entry]]
-id = 1006
 stadt = "Wien"
 name = "Kärntnerstraße"
 miete = [50, 200,600, 1300, 1600, 1950]
@@ -63,7 +56,6 @@ preis_haus = 220
 preis_hotel = 220
 
 [[strassen.entry]]
-id = 1007
 stadt = "Wien"
 name = "Mariahilferstraße"
 miete = [40, 170,500,1000,1300,1600]
@@ -72,7 +64,6 @@ preis_haus = 220
 preis_hotel = 220
 
 [[strassen.entry]]
-id = 1008
 stadt = "Wien"
 name = "Kobenzlestraße"
 miete = [24,110,330,700,900,1050]
@@ -81,7 +72,6 @@ preis_haus = 150
 preis_hotel = 140
 
 [[strassen.entry]]
-id = 1009
 stadt = "Linz"
 name = "Landstraße"
 miete = [14,70,210,500,700,850]
@@ -90,7 +80,6 @@ preis_haus = 100
 preis_hotel = 100
 
 [[strassen.entry]]
-id = 1010
 stadt = "Linz"
 name = "Stifterstraße"
 miete = [20,100,300,600,750,950]
@@ -99,7 +88,6 @@ preis_haus = 160
 preis_hotel = 160
 
 [[strassen.entry]]
-id = 1011
 stadt = "Linz"
 name = "Museumstraße"
 miete = [22,100,320,780,90,1100]
@@ -108,7 +96,6 @@ preis_haus = 150
 preis_hotel = 150
 
 [[strassen.entry]]
-id = 1012
 stadt = "Salzburg"
 name = "Mirabellplatz"
 miete = [24,110,330,700,900,1050]
@@ -117,7 +104,6 @@ preis_haus = 150
 preis_hotel = 140
 
 [[strassen.entry]]
-id = 1013
 stadt = "Salzburg"
 name = "Westbahnstraße"
 miete = [22,100,320,680,850,1000]
@@ -126,7 +112,6 @@ preis_haus = 140
 preis_hotel = 130
 
 [[strassen.entry]]
-id = 1014
 stadt = "Salzburg"
 name = "Universitätsplatz"
 miete = [24,110,330,700,900,1050]
@@ -135,7 +120,6 @@ preis_haus = 150
 preis_hotel = 140
 
 [[strassen.entry]]
-id = 1015
 stadt = "Klagenfurt"
 name = "Burggasse"
 miete = [10,50,150,450,600,730]
@@ -144,7 +128,6 @@ preis_haus = 100
 preis_hotel = 100
 
 [[strassen.entry]]
-id = 1016
 stadt = "Klagenfurt"
 name = "Villacherstraße"
 miete = [16,80,230,550,710,900]
@@ -153,7 +136,6 @@ preis_haus = 110
 preis_hotel = 110
 
 [[strassen.entry]]
-id = 1017
 stadt = "Klagenfurt"
 name = "Alter Platz"
 miete = [18,90,250,600,730,930]
@@ -162,7 +144,6 @@ preis_haus = 120
 preis_hotel = 150
 
 [[strassen.entry]]
-id = 1018
 stadt = "Innsbruck"
 name = "M.-Theresienstr"
 miete = [30,150,450,850,1050,1200]
@@ -171,7 +152,6 @@ preis_haus = 200
 preis_hotel = 200
 
 [[strassen.entry]]
-id = 1019
 stadt = "Innsbruck"
 name = "Andreas Hoferstr."
 miete = [24,110,330,700,900,1050]
@@ -180,7 +160,6 @@ preis_haus = 150
 preis_hotel = 140
 
 [[strassen.entry]]
-id = 1020
 stadt = "Innsbruck"
 name = "Boznerplatz"
 miete = [30,150,450,850,1050,1200]
@@ -189,7 +168,6 @@ preis_haus = 200
 preis_hotel = 200
 
 [[strassen.entry]]
-id = 1021
 stadt = "Bregenz"
 name = "Arlbergstraße"
 miete = [8,40,100,300,450,600]
@@ -198,7 +176,6 @@ preis_haus = 50
 preis_hotel = 50
 
 [[strassen.entry]]
-id = 1022
 stadt = "Bregenz"
 name = "Rathausstraße"
 miete = [14,70,210,500,700,850]

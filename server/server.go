@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"odkt/server/connection"
 	"odkt/server/route"
+	"strings"
 )
 
 type Server struct {
@@ -61,15 +62,20 @@ func connectionHandler(w http.ResponseWriter, r *http.Request) {
 		logrus.Errorf("Failed to upgrade connection: %v", err)
 		return
 	}
-	if r.Header.Get("Authentication") != "Bearer token" {
-		conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "Authentication token is invalid"))
+	authentication := r.Header.Get("Authentication")
+	if authentication == "" || !strings.Contains(authentication, "Bearer") || route.LoginTokens[strings.Split(authentication, " ")[1]] == nil {
+		conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "Authentication authentication is invalid"))
 		conn.Close()
-		logrus.Infof("Connection from %v closed due to invalid token", conn.RemoteAddr())
+		logrus.Infof("Connection from %v closed due to invalid authentication", conn.RemoteAddr())
 		return
 	}
+	token := strings.Split(authentication, " ")[1]
+	user := route.LoginTokens[token]
+	delete(route.LoginTokens, token)
 	logrus.Infof("New connection from %v", conn.RemoteAddr())
 	c := connection.NewConnection(conn)
 	c.AddConnectionHandler(&server, true)
+	c.User = user
 	server.Connections = append(server.Connections, c)
 }
 
