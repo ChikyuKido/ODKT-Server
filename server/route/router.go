@@ -22,4 +22,5 @@ func initRoomRoutes(r *gin.Engine) {
 	group.Use(middleware.AuthMiddleware())
 	group.POST("create", room.CreateRoom())
 	group.GET("list", room.ListRooms())
+	group.POST("join", room.JoinRoom())
 }

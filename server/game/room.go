@@ -1,6 +1,9 @@
 package game
 
-import "odkt/server/db/entity"
+import (
+	"fmt"
+	"odkt/server/db/entity"
+)
 
 type RoomType int
 type RoomState int
@@ -22,4 +25,13 @@ type Room struct {
 	Owner      *entity.User
 	Players    []*entity.User
 	GameRoom   interface{}
+}
+
+func (r *Room) JoinRoom(user *entity.User) error {
+	if uint(len(r.Players)) >= r.MaxPlayers-1 {
+		return fmt.Errorf("max players reached")
+	}
+	r.Players = append(r.Players, user)
+	user.JoinedRoom = r.ID
+	return nil
 }

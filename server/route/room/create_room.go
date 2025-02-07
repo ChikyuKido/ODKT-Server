@@ -21,7 +21,7 @@ func CreateRoom() gin.HandlerFunc {
 			return
 		}
 		if user.JoinedRoom != "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "you have already joined room"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "you have already joined a room"})
 			return
 		}
 		if err := c.ShouldBindJSON(&requestData); err != nil {
