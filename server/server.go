@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"odkt/server/connection"
 	"odkt/server/route"
+	"odkt/server/route/auth"
+	"odkt/server/route/middleware"
 	"strings"
 )
 
@@ -29,11 +31,13 @@ var (
 
 func Start() {
 	r := gin.Default()
+	route.InitRouter(r)
 	r.GET("/ws", func(c *gin.Context) {
 		connectionHandler(c.Writer, c.Request)
 	})
-	r.POST("/api/v1/auth/register", route.Register())
-	r.POST("/api/v1/auth/login", route.Login())
+	r.GET("/test", middleware.AuthMiddleware(), func(c *gin.Context) {
+		c.JSON(200, gin.H{"test": "test"})
+	})
 	go readMessages()
 	err := r.Run(*server.Addr)
 	if err != nil {
@@ -63,15 +67,15 @@ func connectionHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	authentication := r.Header.Get("Authentication")
-	if authentication == "" || !strings.Contains(authentication, "Bearer") || route.LoginTokens[strings.Split(authentication, " ")[1]] == nil {
+	if authentication == "" || !strings.Contains(authentication, "Bearer") || auth.LoginTokens[strings.Split(authentication, " ")[1]] == nil {
 		conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "Authentication authentication is invalid"))
 		conn.Close()
 		logrus.Infof("Connection from %v closed due to invalid authentication", conn.RemoteAddr())
 		return
 	}
 	token := strings.Split(authentication, " ")[1]
-	user := route.LoginTokens[token]
-	delete(route.LoginTokens, token)
+	user := auth.LoginTokens[token]
+	delete(auth.LoginTokens, token)
 	logrus.Infof("New connection from %v", conn.RemoteAddr())
 	c := connection.NewConnection(conn)
 	c.AddConnectionHandler(&server, true)

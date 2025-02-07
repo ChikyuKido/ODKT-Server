@@ -1,4 +1,4 @@
-package route
+package auth
 
 import (
 	"github.com/gin-gonic/gin"
@@ -41,6 +41,11 @@ func Login() gin.HandlerFunc {
 		}
 		id := uuid.New()
 		LoginTokens[id.String()] = user
-		c.JSON(http.StatusOK, gin.H{"token": id.String()})
+		token, err := util.GenerateJWT(user.Username)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "something went wrong. Please try again later."})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"jwt": token})
 	}
 }

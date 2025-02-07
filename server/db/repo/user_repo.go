@@ -2,6 +2,7 @@ package repo
 
 import (
 	"errors"
+	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 	"odkt/server/db"
@@ -14,6 +15,7 @@ func InsertNewUser(username, password string) bool {
 		Username:  username,
 		Password:  password,
 		CreatedAt: time.Now().Unix(),
+		UUID:      uuid.New().String(),
 	}
 	if err := db.DB().Create(&user).Error; err != nil {
 		logrus.Errorf("failed to create use: %v", err)
