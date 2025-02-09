@@ -2,25 +2,28 @@ package dkt
 
 import (
 	"github.com/google/uuid"
-	"odkt/server/db/entity"
+	"odkt/server/connection"
 	"odkt/server/game"
 )
 
 type ODKRoom struct {
+	Room game.Room
 }
 
-func CreateNewODKRoom(maxPlayers uint, owner *entity.User) *game.Room {
+func CreateNewODKRoom(maxPlayers uint, name, ownerUUID string) *game.Room {
 	if maxPlayers < 2 || maxPlayers > 4 {
 		return nil
 	}
 	var odkRoom ODKRoom
-	return &game.Room{
+	room := game.Room{
 		ID:         uuid.New().String(),
-		State:      game.LOBBY,
+		Name:       name,
+		State:      game.AWAITING_OWNER,
 		Type:       game.DKT,
 		MaxPlayers: maxPlayers,
-		Owner:      owner,
-		Players:    []*entity.User{},
+		Owner:      ownerUUID,
+		Players:    []*connection.Connection{},
 		GameRoom:   odkRoom,
 	}
+	return &room
 }

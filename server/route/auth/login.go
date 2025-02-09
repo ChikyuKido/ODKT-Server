@@ -41,7 +41,7 @@ func Login() gin.HandlerFunc {
 		}
 		id := uuid.New()
 		LoginTokens[id.String()] = user
-		token, err := util.GenerateJWT(user.Username)
+		token, err := util.GenerateJWT(user.UUID)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "something went wrong. Please try again later."})
 			return

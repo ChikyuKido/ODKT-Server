@@ -5,7 +5,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"odkt/server"
 	"odkt/server/db"
-	"odkt/server/helper"
 	"odkt/server/store"
 	"os"
 )
@@ -20,6 +19,5 @@ func main() {
 	os.MkdirAll("./data", 0750)
 	store.InitStores()
 	db.InitDatabase()
-	helper.ImportCardsToDB()
 	server.Start()
 }

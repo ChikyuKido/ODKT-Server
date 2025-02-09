@@ -2,6 +2,7 @@ package repo
 
 import (
 	"errors"
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -34,6 +35,15 @@ func GetAllUsers() []entity.User {
 func GetUserByUsername(username string) *entity.User {
 	var user entity.User
 	if err := db.DB().First(&user, entity.User{Username: username}).Error; err != nil {
+		logrus.Errorf("failed to get user: %v", err)
+		return nil
+	}
+	return &user
+}
+func GetUserByUUID(uuid string) *entity.User {
+	var user entity.User
+	fmt.Println(uuid)
+	if err := db.DB().First(&user, entity.User{UUID: uuid}).Error; err != nil {
 		logrus.Errorf("failed to get user: %v", err)
 		return nil
 	}

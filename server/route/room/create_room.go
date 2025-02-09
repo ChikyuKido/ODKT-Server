@@ -12,6 +12,7 @@ import (
 func CreateRoom() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var requestData struct {
+			Name         string                 `json:"name"`
 			RoomType     game.RoomType          `json:"room_type"`
 			MaxUsers     uint                   `json:"max_users"`
 			GameSettings map[string]interface{} `json:"game_settings"`
@@ -28,9 +29,13 @@ func CreateRoom() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "bad json format"})
 			return
 		}
+		if requestData.Name == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "name is required"})
+			return
+		}
 		var room *game.Room = nil
 		if requestData.RoomType == game.DKT {
-			room = dkt.CreateNewODKRoom(requestData.MaxUsers, user)
+			room = dkt.CreateNewODKRoom(requestData.MaxUsers, requestData.Name, user.UUID)
 			if room == nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create new ODK room"})
 				return
@@ -41,8 +46,7 @@ func CreateRoom() gin.HandlerFunc {
 		}
 
 		store.RoomStore.Store(room.ID, room)
-		user.JoinedRoom = room.ID
-		//TODO: return link to a websocket connection
-		c.JSON(http.StatusOK, gin.H{"message": "room successfully created", "ws": "implement"})
+		user.JoinedRoom = "awaitingJoin"
+		c.JSON(http.StatusOK, gin.H{"message": "room successfully created", "roomID": room.ID})
 	}
 }

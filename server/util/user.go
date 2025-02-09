@@ -26,3 +26,16 @@ func GetUserFromContext(c *gin.Context) *entity.User {
 	}
 	return u
 }
+
+// GetUserFromContextWithoutError Returns the user or a null pointer
+func GetUserFromContextWithoutError(c *gin.Context) *entity.User {
+	user, exists := c.Get("user")
+	if !exists {
+		return nil
+	}
+	u, ok := user.(*entity.User)
+	if !ok {
+		return nil
+	}
+	return u
+}

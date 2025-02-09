@@ -4,8 +4,6 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"odkt/server/db/entity"
-	"odkt/server/db/repo"
 	"odkt/server/store"
 	"odkt/server/util"
 	"strings"
@@ -33,15 +31,11 @@ func AuthMiddleware() gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid token"})
 			return
 		}
-		username := claims["username"].(string)
-		var user *entity.User
-		if value, ok := store.UserStore.Load(username); ok {
-			user = value.(*entity.User)
-		} else {
-			user = repo.GetUserByUsername(username)
-			store.UserStore.Store(username, user)
-			store.UserIDStore.Store(user.UUID, user)
+		uuid, ok := claims["uuid"].(string)
+		if !ok {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid token"})
 		}
+		var user = store.GetUserByUUID(uuid)
 		if user == nil {
 			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "something went wrong. Please try again later."})
 		}

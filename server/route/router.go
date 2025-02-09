@@ -5,11 +5,19 @@ import (
 	"odkt/server/route/auth"
 	"odkt/server/route/middleware"
 	"odkt/server/route/room"
+	"odkt/server/route/websocket"
 )
 
 func InitRouter(r *gin.Engine) {
 	initAuthRoutes(r)
 	initRoomRoutes(r)
+	initWebsocketRoutes(r)
+}
+
+func initWebsocketRoutes(r *gin.Engine) {
+	group := r.Group("/ws")
+	group.Use(middleware.AuthMiddleware())
+	group.GET("joinRoom", websocket.JoinRoom())
 }
 
 func initAuthRoutes(r *gin.Engine) {
@@ -22,5 +30,4 @@ func initRoomRoutes(r *gin.Engine) {
 	group.Use(middleware.AuthMiddleware())
 	group.POST("create", room.CreateRoom())
 	group.GET("list", room.ListRooms())
-	group.POST("join", room.JoinRoom())
 }
